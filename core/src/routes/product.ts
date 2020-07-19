@@ -1,6 +1,4 @@
 import { Router } from "express";
-import { UserController } from "@controllers/UserController";
-import { AuthController } from "@controllers/AuthController";
 import { ProductController } from "@controllers/ProductController";
 import createStorage from "@config/multer";
 import multer from "multer";
