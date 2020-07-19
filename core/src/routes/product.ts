@@ -9,12 +9,10 @@ import { checkJwt } from "@middlewares/checkJwt";
 const upload = multer(createStorage("products"));
 const router = Router();
 
-router.get("/", ProductController.list);
-router.post(
-  "/create",
-  [upload.single("image"), checkJwt],
-  UserController.create
-);
+router.get("/", checkJwt, ProductController.list);
+router.post("/", [upload.single("image"), checkJwt], ProductController.create);
+router.delete("/:productId", ProductController.delete);
+router.get("/:productId", ProductController.index);
 // router.post(":id", chec);
 
 export default router;

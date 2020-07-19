@@ -21,7 +21,9 @@
       "@middlewares/*": ["./src/middlewares/*"],
       "@config/*": ["./src/config/*"],
       "@routes/*": ["./src/routes/*"],
-      "@entities/*": ["./src/entities/*"]
+      "@entities/*": ["./src/entities/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@services/*": ["./src/services/*"]
     }
   },
   "include": ["src/**/*"]
