@@ -11,9 +11,9 @@ const router = Router();
 
 router.get("/", checkJwt, ProductController.list);
 router.post("/", [upload.single("image"), checkJwt], ProductController.create);
-router.delete("/:productId", ProductController.delete);
-router.put("/:productId", ProductController.edit);
-router.get("/:productId", ProductController.index);
+router.delete("/:productId", checkJwt, ProductController.delete);
+router.put("/:productId", [upload.single("image"), checkJwt], ProductController.edit);
+router.get("/:productId", checkJwt, ProductController.index);
 // router.post(":id", chec);
 
 export default router;
