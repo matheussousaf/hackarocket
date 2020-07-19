@@ -25,6 +25,10 @@ export class Product {
   image: string;
 
   @Column()
+  @Length(4, 100)
+  category: string;
+
+  @Column()
   price: number;
 
   @ManyToOne((type) => User, (user) => user.urlName)

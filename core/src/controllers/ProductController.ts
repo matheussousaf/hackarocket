@@ -70,11 +70,42 @@ export class ProductController {
     deleteProductImage(product.image);
     productRepository.remove(product);
 
-    res.status(201).send();
+    res.status(204).send();
+  };
+
+  static edit = async (req: Request, res: Response) => {
+    const { productId } = req.params;
+    const { name, description, price, category } = req.body;
+
+    const productRepository = getRepository(Product);
+    const userId = getUserIdFromJwt(req);
+
+    const product = await productRepository.findOne({
+      where: {
+        id: productId,
+        user: {
+          id: userId,
+        },
+      },
+    });
+
+    product.name = name;
+    product.category = category;
+    product.description = description;
+    product.price = price;
+    product.image = req.file.filename;
+
+    if (!productId) {
+      res.status(404).send("Product not found on your inventory");
+    }
+
+    productRepository.save(product);
+
+    res.status(204).send();
   };
 
   static create = async (req: Request, res: Response) => {
-    const { name, description, price } = req.body;
+    const { name, description, price, category } = req.body;
 
     const productRepository = getRepository(Product);
     const userRepository = getRepository(User);
@@ -85,6 +116,7 @@ export class ProductController {
     product.description = description;
     product.price = price;
     product.image = req.file.filename;
+    product.category = category;
 
     const userId = getUserIdFromJwt(req);
 
