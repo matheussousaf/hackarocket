@@ -3,6 +3,7 @@ import { User } from "@entities/User";
 import config from "@config/config";
 import { getRepository } from "typeorm";
 import { validate } from "class-validator";
+import { serializeProfileImage } from "@utils/serialize";
 
 export class UserController {
   static list = async (req: Request, res: Response) => {
@@ -17,7 +18,7 @@ export class UserController {
     }
 
     users.map((user) => {
-      user.image = `http://192.168.0.60:3333/uploads/profiles/${user.image}`;
+      user.image = serializeProfileImage(user.image);
     });
 
     res.send(users);

@@ -3,6 +3,8 @@ import { getRepository } from "typeorm";
 import { Product } from "@entities/Product";
 import { User } from "@entities/User";
 import getUserIdFromJwt from "@utils/getId";
+import { serializeProductImage } from "@utils/serialize";
+import { deleteProductImage } from "@utils/deletion";
 
 export class ProductController {
   static list = async (req: Request, res: Response) => {
@@ -11,6 +13,10 @@ export class ProductController {
 
     const products = await productRepository.find({
       where: { user: { id: userId } },
+    });
+
+    products.map((product) => {
+      product.image = serializeProductImage(product.image);
     });
 
     res.send(products);
@@ -37,7 +43,9 @@ export class ProductController {
         .send({ response: "Product not found on your inventory." });
     }
 
-    res.send(product);
+    const serializedImage = serializeProductImage(product.image);
+
+    res.send({ ...product, image: serializedImage });
   };
 
   static delete = async (req: Request, res: Response) => {
@@ -59,6 +67,7 @@ export class ProductController {
       res.status(404).send("Product not found on your inventory");
     }
 
+    deleteProductImage(product.image);
     productRepository.remove(product);
 
     res.status(201).send();
@@ -75,6 +84,7 @@ export class ProductController {
     product.name = name;
     product.description = description;
     product.price = price;
+    product.image = req.file.filename;
 
     const userId = getUserIdFromJwt(req);
 
