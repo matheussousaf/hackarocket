@@ -9,7 +9,15 @@ export class UserController {
     const userRepository = getRepository(User);
 
     const users = await userRepository.find({
-      select: ["id", "name", "email"],
+      select: ["id", "name", "email", "image", "urlName"],
+    });
+
+    if (!users) {
+      res.status(404).send({ response: "No users found." });
+    }
+
+    users.map((user) => {
+      user.image = `http://192.168.0.60:3333/uploads/profiles/${user.image}`;
     });
 
     res.send(users);
@@ -39,13 +47,15 @@ export class UserController {
   };
 
   static create = async (req: Request, res: Response) => {
-    const { name, password, email } = req.body;
+    const { name, password, email, urlName } = req.body;
 
     const user = new User();
 
     user.name = name;
+    user.image = req.file.filename;
     user.email = email;
     user.password = password;
+    user.urlName = urlName;
 
     const errors = await validate(user);
 

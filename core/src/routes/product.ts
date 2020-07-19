@@ -15,7 +15,6 @@ router.post(
   [upload.single("image"), checkJwt],
   UserController.create
 );
-router.post("/list", AuthController.login);
-router.post(":id");
+// router.post(":id", chec);
 
 export default router;

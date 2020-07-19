@@ -14,6 +14,7 @@ createConnection()
     app.use(helmet());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
+    app.use("/uploads", express.static("uploads"));
 
     app.use("/", routes);
 
