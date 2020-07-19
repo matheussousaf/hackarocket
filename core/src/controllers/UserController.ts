@@ -10,7 +10,7 @@ export class UserController {
     const userRepository = getRepository(User);
 
     const users = await userRepository.find({
-      select: ["id", "name", "email", "image", "urlName"],
+      select: ["id", "name", "email", "image", "urlName", "type"],
     });
 
     if (!users) {
@@ -31,7 +31,7 @@ export class UserController {
 
     const user = await userRepository.findOne({
       where: { email: email },
-      select: ["name", "email", "urlName"],
+      select: ["name", "email", "urlName", "type"],
     });
 
     if (!user) {
@@ -48,7 +48,7 @@ export class UserController {
   };
 
   static create = async (req: Request, res: Response) => {
-    const { name, password, email, urlName } = req.body;
+    const { name, password, email, urlName, type } = req.body;
 
     const user = new User();
 
@@ -57,6 +57,7 @@ export class UserController {
     user.email = email;
     user.password = password;
     user.urlName = urlName;
+    user.type = type;
 
     const errors = await validate(user);
 

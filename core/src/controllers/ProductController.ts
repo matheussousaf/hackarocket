@@ -68,7 +68,12 @@ export class ProductController {
     }
 
     deleteProductImage(product.image);
-    productRepository.remove(product);
+
+    try {
+      await productRepository.remove(product);
+    } catch (error) {
+      res.status(400).send({ response: `Wrong formatting: ${error}` });
+    }
 
     res.status(204).send();
   };
@@ -99,7 +104,11 @@ export class ProductController {
       res.status(404).send("Product not found on your inventory");
     }
 
-    productRepository.save(product);
+    try {
+     await productRepository.save(product);
+    } catch (error) {
+      res.status(400).send({ response: `Wrong formatting: ${error}` });
+    }
 
     res.status(204).send();
   };
@@ -128,8 +137,12 @@ export class ProductController {
 
     product.user = user;
 
-    productRepository.save(product);
-    userRepository.save(user);
+    try {
+      await productRepository.save(product);
+      await userRepository.save(user);
+    } catch (error) {
+      res.status(400).send({ response: `Wrong formatting: ${error}` });
+    }
 
     res.status(204).send();
   };

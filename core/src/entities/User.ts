@@ -25,6 +25,10 @@ export class User {
   @Length(4, 100)
   image: string;
 
+  @Column()
+  @Length(4, 100)
+  type: string;
+
   @Column({ unique: true })
   @Length(4, 100)
   email: string;
