@@ -1,13 +1,6 @@
 module.exports = {
   presets: [
-    [
-      "@babel/preset-env",
-      {
-        targets: {
-          node: "current",
-        },
-      },
-    ],
+    ["@babel/preset-env", { targets: { node: "current" } }],
     "@babel/preset-typescript",
   ],
   plugins: [
@@ -16,16 +9,18 @@ module.exports = {
       {
         alias: {
           "@config": "./src/config",
-          "@models": "./src/models",
           "@controllers": "./src/controllers",
-          "@middlewares": "./src/middlewares",
-          "@routes": "./src/routes",
           "@entities": "./src/entities",
-          "@utils": "./src/utils",
+          "@middlewares": "./src/middlewares",
+          "@models": "./src/models",
+          "@routes": "./src/routes",
           "@services": "./src/services",
+          "@utils": "./src/utils",
         },
       },
     ],
+    "babel-plugin-transform-typescript-metadata",
+    ["@babel/plugin-proposal-decorators", { legacy: true }],
+    ["@babel/plugin-proposal-class-properties", { loose: true }],
   ],
-  ignore: ["**/*.spec.ts"],
 };

@@ -1,9 +1,9 @@
 const serializeProductImage = (filename: string) => {
-    return `http://localhost:3333/uploads/products/${filename}`;
+    return `https://vitrine-core.herokuapp.com/uploads/products/${filename}`;
 
 }
 const serializeProfileImage = (filename: string) => {
-    return `http://localhost:3333/uploads/profiles/${filename}`;
+    return `https://vitrine-core.herokuapp.com/uploads/profiles/${filename}`;
 }
 
 export {

@@ -7,7 +7,7 @@ RUN yarn
 
 # Bundle app source
 COPY . .
-RUN mkdir -p uploads & mkdir uploads/profiles & uploads/products 
+RUN mkdir -p uploads & mkdir -p uploads/profiles & mkdir -p uploads/products 
 
 RUN yarn build
 

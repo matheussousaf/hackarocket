@@ -1,7 +1,6 @@
-import multer, { Options } from "multer";
+import multer from "multer";
 import path from "path";
 import crypto from "crypto";
-import fs from "fs";
 
 const createStorage = (dirname: string) => {
   return {

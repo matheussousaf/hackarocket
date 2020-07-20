@@ -1,18 +1,15 @@
 {
-    "type": "mysql",
-    "host": "localhost",
-    "port": 3306,
-    "username": "matheus",
-    "password": "root",
-    "database": "vitrine_core",
-    "synchronize": true,
-    "logging": false,
-    "entities": ["src/entities/**/*.ts"],
-    "migrations": ["src/migrations/**/*.ts"],
-    "subscribers": ["src/subscriber/**/*.ts"],
-    "cli": {
-      "entitiesDir": "src/entities",
-      "migrationsDir": "src/migrations",
-      "subscribersDir": "src/subscriberData"
-    }
+  "type": "mysql",
+  "host": "bmsyhziszmhf61g1.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+  "port": 3306,
+  "username": "vj8r2qzw28dvfja1",
+  "password": "d5g69preht04b0b6",
+  "database": "oglbj5wi6gp8n9x7",
+  "synchronize": true,
+  "logging": false,
+  "entities": ["./dist/entities/*.ts"],
+  "migrations": ["./src/migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "./src/migrations"
   }
+}
